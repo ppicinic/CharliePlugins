@@ -1,0 +1,4 @@
+CharliePlugins
+==============
+
+Plugins for charlie
