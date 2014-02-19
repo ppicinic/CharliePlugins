@@ -20,15 +20,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * First test in for section 1 your hand: 12-17 their hand: 2-6
+ * Second test in for section 1 your hand: 12-17 their hand: 7-A
  * @author Gregory Cremins, Phil Picnic 
  * @version 2-19-2014
  * 
  */
-public class Test00_1217_26 {
-    
-    public Test00_1217_26() {
-    }
+public class Test01_1217_7A {
     
     /**
      * Method to test the given parameters will throw exception if there was
@@ -40,11 +37,11 @@ public class Test00_1217_26 {
         try{
             Hid hid = new Hid(YOU);
             Hand hand = new Hand(hid);
-            hand.hit(new Card(10, CLUBS));
-            hand.hit(new Card(7, CLUBS));
-            Card upCard = new Card(2, CLUBS);
+            hand.hit(new Card(9, DIAMONDS));
+            hand.hit(new Card(5, SPADES));
+            Card upCard = new Card(12, HEARTS);
             Play play = new BasicStrategy().advise(hand, upCard);
-            assertTrue(play == Play.STAY);  
+            assertTrue(play == Play.HIT);
         }
         catch(Exception e)
         {
