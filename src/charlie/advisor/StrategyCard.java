@@ -14,14 +14,21 @@ import java.util.HashMap;
 
 /**
  *
- * @author Phil
+ * @author Phil Picinic
+ * This is a singleton class that creates a single instance of the Black Jack
+ * Strategy Card.
  */
 public class StrategyCard {
  
+    // hashmap of arraylists to represent the card
     private HashMap<String, ArrayList<Play>> card;
     
     private static volatile StrategyCard instance = null;   
     
+    /**
+     * Constructor
+     * creates and fills in the card
+     */
     private StrategyCard(){
         card = new HashMap<>();
         ArrayList<Play> temp;
@@ -146,6 +153,11 @@ public class StrategyCard {
         
     }
     
+    /**
+     * gets an instance of the strategy card
+     * if there isn't one, one will be created
+     * @return the strategy card
+     */
     public static StrategyCard getStrategyCard(){
         if (instance == null) {
             synchronized(StrategyCard.class){
@@ -158,18 +170,34 @@ public class StrategyCard {
         return instance;
     }
     
+    /**
+     * fills an array list with a decided move
+     * @param array the array to fill
+     */
     private void fill(ArrayList<Play> array){
         for(int i = 0; i < 12; i++){
             array.add(i, Play.NONE);
         }
     }
+    
+    /**
+     * gets the play suggested by the card
+     * @param myHand the player's hand
+     * @param upCard the dealer's up card
+     * @return the play that is suggested
+     */
     public Play getPlay(Hand myHand, Card upCard){
         String hand = createHandString(myHand);
-        int cardVal = createCardVal(upCard);
+        int cardVal = upCard.value();
         ArrayList<Play> temp = card.get(hand);
         return temp.get(cardVal);
     }
     
+    /**
+     * creates a hand string code based on the hand
+     * @param hand the player's hand
+     * @return the hand string code
+     */
     private String createHandString(Hand hand){
         // detect pair
         if(hand.isPair()){
@@ -222,15 +250,5 @@ public class StrategyCard {
             return "5-8";
         }
         return "" + value;
-    }
-    
-    private int createCardVal(Card card){
-        if(card.isAce()){
-            return 11;
-        }
-        if(card.isFace()){
-            return 10;
-        }
-        return card.value();
     }
 }
