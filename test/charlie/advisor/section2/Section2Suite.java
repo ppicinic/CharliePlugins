@@ -15,7 +15,8 @@ import org.junit.runners.Suite;
 
 /**
  *
- * @author phil
+ * @author Phil Picinic
+ * This test suite runs all tests for section 2
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({charlie.advisor.section2.Test00_511_26.class, 

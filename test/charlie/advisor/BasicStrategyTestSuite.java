@@ -18,7 +18,8 @@ import charlie.advisor.section3.Section3Suite;
 import charlie.advisor.section4.Section4Suite;
 /**
  *
- * @author phil
+ * @author Phil Picinic
+ * This Test suite runs the four test suites for each card section
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({Section1Suite.class, Section2Suite.class, 
