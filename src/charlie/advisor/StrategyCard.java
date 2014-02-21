@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class StrategyCard {
  
     // hashmap of arraylists to represent the card
-    private HashMap<String, ArrayList<Play>> card;
+    private final HashMap<String, ArrayList<Play>> card;
     
     private static volatile StrategyCard instance = null;   
     
@@ -37,15 +37,12 @@ public class StrategyCard {
             String hand = "" + i;
             card.put(hand, new ArrayList<Play>(11));
             temp = card.get(hand);
-            fill(temp);
+            fill(temp, Play.HIT);
             if(i >= 12 && i <= 16){
                 
                 for(int y = 2; y < 12; y++){
                     
-                    if(y >= 7){
-                        temp.set(y, Play.HIT);
-                    }
-                    else{
+                    if(y <= 6){
                         temp.set(y, Play.STAY);
                     }
                 }
@@ -71,8 +68,6 @@ public class StrategyCard {
                 for(int y = 2; y < 12; y++){
                     if(y >= 3 && y <=6){
                         temp.set(y, Play.DOUBLE_DOWN);
-                    }else{
-                        temp.set(y, Play.HIT);
                     }
                 }
             }
@@ -80,30 +75,21 @@ public class StrategyCard {
         }
         card.put("17+", new ArrayList<Play>(11));
         temp = card.get("17+");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.STAY);
-        }
+        fill(temp, Play.STAY);
         card.put("A, 8-10", temp);
         card.put("10, 10", temp);
         card.put("5-8", new ArrayList<Play>(11));
         temp = card.get("5-8");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.HIT);
-        }
+        fill(temp, Play.HIT);
         card.put("A, 7", new ArrayList<Play>(11));
         temp = card.get("A, 7");
-        fill(temp);
+        fill(temp, Play.DOUBLE_DOWN);
         for(int y = 2; y < 12; y++){
             if(y == 2 || y == 7 || y == 8 ){
                 temp.set(y, Play.STAY);
             }
             else if(y >= 9){
                 temp.set(y, Play.HIT);
-            }
-            else{
-                temp.set(y, Play.DOUBLE_DOWN);
             }
         }
         temp = (ArrayList<Play>) temp.clone();
@@ -122,10 +108,7 @@ public class StrategyCard {
         
         card.put("A,A 8,8", new ArrayList<Play>());
         temp = card.get("A,A 8,8");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.SPLIT);
-        }
+        fill(temp, Play.SPLIT);
         temp = (ArrayList<Play>) temp.clone();
         temp.set(7, Play.STAY);
         temp.set(10, Play.STAY);
@@ -149,7 +132,6 @@ public class StrategyCard {
         card.put("4, 4", temp);
         temp = card.get("10");
         card.put("5, 5", temp);
-        // create card
         
     }
     
@@ -174,9 +156,9 @@ public class StrategyCard {
      * fills an array list with a decided move
      * @param array the array to fill
      */
-    private void fill(ArrayList<Play> array){
+    private void fill(ArrayList<Play> array, Play play){
         for(int i = 0; i < 12; i++){
-            array.add(i, Play.NONE);
+            array.add(i, play);
         }
     }
     
