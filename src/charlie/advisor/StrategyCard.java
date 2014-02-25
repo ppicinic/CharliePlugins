@@ -14,14 +14,21 @@ import java.util.HashMap;
 
 /**
  *
- * @author Phil
+ * @author Phil Picinic
+ * This is a singleton class that creates a single instance of the Black Jack
+ * Strategy Card.
  */
 public class StrategyCard {
  
-    private HashMap<String, ArrayList<Play>> card;
+    // hashmap of arraylists to represent the card
+    private final HashMap<String, ArrayList<Play>> card;
     
     private static volatile StrategyCard instance = null;   
     
+    /**
+     * Constructor
+     * creates and fills in the card
+     */
     private StrategyCard(){
         card = new HashMap<>();
         ArrayList<Play> temp;
@@ -30,15 +37,12 @@ public class StrategyCard {
             String hand = "" + i;
             card.put(hand, new ArrayList<Play>(11));
             temp = card.get(hand);
-            fill(temp);
+            fill(temp, Play.HIT);
             if(i >= 12 && i <= 16){
                 
                 for(int y = 2; y < 12; y++){
                     
-                    if(y >= 7){
-                        temp.set(y, Play.HIT);
-                    }
-                    else{
+                    if(y <= 6){
                         temp.set(y, Play.STAY);
                     }
                 }
@@ -64,8 +68,6 @@ public class StrategyCard {
                 for(int y = 2; y < 12; y++){
                     if(y >= 3 && y <=6){
                         temp.set(y, Play.DOUBLE_DOWN);
-                    }else{
-                        temp.set(y, Play.HIT);
                     }
                 }
             }
@@ -73,30 +75,21 @@ public class StrategyCard {
         }
         card.put("17+", new ArrayList<Play>(11));
         temp = card.get("17+");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.STAY);
-        }
+        fill(temp, Play.STAY);
         card.put("A, 8-10", temp);
         card.put("10, 10", temp);
         card.put("5-8", new ArrayList<Play>(11));
         temp = card.get("5-8");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.HIT);
-        }
+        fill(temp, Play.HIT);
         card.put("A, 7", new ArrayList<Play>(11));
         temp = card.get("A, 7");
-        fill(temp);
+        fill(temp, Play.DOUBLE_DOWN);
         for(int y = 2; y < 12; y++){
             if(y == 2 || y == 7 || y == 8 ){
                 temp.set(y, Play.STAY);
             }
             else if(y >= 9){
                 temp.set(y, Play.HIT);
-            }
-            else{
-                temp.set(y, Play.DOUBLE_DOWN);
             }
         }
         temp = (ArrayList<Play>) temp.clone();
@@ -115,10 +108,7 @@ public class StrategyCard {
         
         card.put("A,A 8,8", new ArrayList<Play>());
         temp = card.get("A,A 8,8");
-        fill(temp);
-        for(int y = 2; y < 12; y++){
-            temp.set(y, Play.SPLIT);
-        }
+        fill(temp, Play.SPLIT);
         temp = (ArrayList<Play>) temp.clone();
         temp.set(7, Play.STAY);
         temp.set(10, Play.STAY);
@@ -142,10 +132,14 @@ public class StrategyCard {
         card.put("4, 4", temp);
         temp = card.get("10");
         card.put("5, 5", temp);
-        // create card
         
     }
     
+    /**
+     * gets an instance of the strategy card
+     * if there isn't one, one will be created
+     * @return the strategy card
+     */
     public static StrategyCard getStrategyCard(){
         if (instance == null) {
             synchronized(StrategyCard.class){
@@ -158,18 +152,34 @@ public class StrategyCard {
         return instance;
     }
     
-    private void fill(ArrayList<Play> array){
+    /**
+     * fills an array list with a decided move
+     * @param array the array to fill
+     */
+    private void fill(ArrayList<Play> array, Play play){
         for(int i = 0; i < 12; i++){
-            array.add(i, Play.NONE);
+            array.add(i, play);
         }
     }
+    
+    /**
+     * gets the play suggested by the card
+     * @param myHand the player's hand
+     * @param upCard the dealer's up card
+     * @return the play that is suggested
+     */
     public Play getPlay(Hand myHand, Card upCard){
         String hand = createHandString(myHand);
-        int cardVal = createCardVal(upCard);
+        int cardVal = upCard.value();
         ArrayList<Play> temp = card.get(hand);
         return temp.get(cardVal);
     }
     
+    /**
+     * creates a hand string code based on the hand
+     * @param hand the player's hand
+     * @return the hand string code
+     */
     private String createHandString(Hand hand){
         // detect pair
         if(hand.isPair()){
@@ -222,15 +232,5 @@ public class StrategyCard {
             return "5-8";
         }
         return "" + value;
-    }
-    
-    private int createCardVal(Card card){
-        if(card.isAce()){
-            return 11;
-        }
-        if(card.isFace()){
-            return 10;
-        }
-        return card.value();
     }
 }
