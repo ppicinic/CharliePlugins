@@ -171,6 +171,12 @@ public class StrategyCard {
     public Play getPlay(Hand myHand, Card upCard){
         String hand = createHandString(myHand);
         int cardVal = upCard.value();
+        if(upCard.isFace()){
+            cardVal = 10;
+        }
+        if(upCard.isAce()){
+            cardVal = 11;
+        }
         ArrayList<Play> temp = card.get(hand);
         return temp.get(cardVal);
     }
