@@ -9,6 +9,7 @@ import charlie.dealer.Seat;
 import charlie.plugin.IBot;
 import charlie.util.Play;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -21,13 +22,17 @@ public class PerfectBot implements IBot{
     private Hid hid;
     private Hand hand;
     private Card upCard;
+    private Random randomGen;
     
     public PerfectBot(){
-        
+        randomGen = new Random();
     }
     
     @Override
     public Hand getHand() {
+        System.out.println("hand collected");
+        this.hid = new Hid(this.seat);
+        this.hand = new Hand(this.hid);
         return this.hand;
     }
 
@@ -39,14 +44,11 @@ public class PerfectBot implements IBot{
     @Override
     public void sit(Seat seat) {
         this.seat = seat;
-        this.hid = new Hid(this.seat);
-        this.hand = new Hand(this.hid);
-        
     }
 
     @Override
     public void startGame(List<Hid> hids, int shoeSize) {
-        this.hand = new Hand(this.hid);
+        
     }
 
     @Override
@@ -56,10 +58,13 @@ public class PerfectBot implements IBot{
 
     @Override
     public void deal(Hid hid, Card card, int[] values) {
-        if(this.hid.getSeat() == hid.getSeat()){
-            this.hand.hit(card);
+        if (this.hid.getSeat() == hid.getSeat()) {
+            if (this.hand.size() > 2) {
+                
+            }
+            //System.out.println("Card recieved");
         }
-        if(hid.getSeat() == Seat.DEALER){
+        if (hid.getSeat() == Seat.DEALER) {
             this.upCard = card;
         }
     }
@@ -106,20 +111,9 @@ public class PerfectBot implements IBot{
 
     @Override
     public void play(Hid hid) {
-        if(this.hid.getSeat() == hid.getSeat()){
-            Play play = new BasicStrategy().advise(this.hand, this.upCard);
-            
-            if(play == Play.HIT || play == Play.SPLIT){
-                this.dealer.hit(this, this.hid);
-                this.play(this.hid);
-            }
-            if(play == Play.DOUBLE_DOWN){
-                this.dealer.doubleDown(this, this.hid);
-                this.play(this.hid);
-            }
-            if(play == Play.STAY){
-                this.dealer.stay(this, this.hid);
-            }            
+        if (this.hid.getSeat() == hid.getSeat()) {
+            new Thread(new PerfectPlay(this, this.dealer, this.hid, this.hand, 
+                    this.upCard)).start();
         }
     }
     
