@@ -5,7 +5,6 @@
  */
 package charlie.bot.server;
 
-import charlie.advisor.BasicStrategy;
 import charlie.advisor.StrategyCard;
 import charlie.card.Card;
 import charlie.card.Hand;
@@ -17,17 +16,27 @@ import java.util.Random;
 
 /**
  *
- * @author Phil
+ * @author Phillip Picnic, Gregory Cremins
+ * @version 3-26-2014
  */
 public class PerfectPlay implements Runnable {
 
-    private IBot bot;
-    private Hid hid;
-    private Hand hand;
-    private Dealer dealer;
+    private final IBot bot;
+    private final Hid hid;
+    private final Hand hand;
+    private final Dealer dealer;
     private Card upCard;
-    private Random random;
+    private final Random random;
 
+    /**
+     * Constructor for perfect play
+     * 
+     * @param bot
+     * @param dealer
+     * @param hid
+     * @param hand
+     * @param upCard 
+     */
     public PerfectPlay(IBot bot, Dealer dealer, Hid hid, Hand hand,
             Card upCard) {
         this.bot = bot;
@@ -38,10 +47,16 @@ public class PerfectPlay implements Runnable {
         random = new Random(1);
     }
 
+    /**
+     * Method to set the up card for the bot
+     * @param upCard the upcard to be set
+     */
     public void setUpCard(Card upCard) {
         this.upCard = upCard;
     }
-
+    /**
+     * Method to choose the play for the bot
+     */
     @Override
     public void run() {
 

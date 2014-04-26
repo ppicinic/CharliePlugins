@@ -5,22 +5,30 @@
         <group>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section4/Test01_22AA_26.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section2/Test01_511_7A.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/bot/server/PerfectPlay.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section4/Test01_22AA_7A.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section2/Test00_511_7A.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/advisor/BasicStrategy.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test01_A210_26.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/sidebet/rule/SideBetRule.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test00_1217_7A.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlieplugins/CharliePlugins.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test01_1217_7A.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test00_1217_26.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/sidebet/test/Shoe.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/bot/server/PerfectPlay.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/bot/test/Shoe.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section4/Test00_22AA_7A.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section2/Test00_511_26.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test01_A210_26.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test01_1217_26.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test00_1217_7A.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test01_1217_7A.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section4/Test00_22AA_26.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/bot/server/PerfectBot.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test01_A210_7A.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section4/Test00_22AA_26.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/advisor/StrategyCard.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section2/Test01_511_26.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section1/Test00_1217_26.java</file>
-            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test00_A210_26.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/src/charlie/sidebet/view/SideBetView.java</file>
             <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test00_A210_7A.java</file>
+            <file>file:/C:/Users/Whar/Documents/GitHub/CharliePlugins/test/charlie/advisor/section3/Test00_A210_26.java</file>
         </group>
     </open-files>
 </project-private>

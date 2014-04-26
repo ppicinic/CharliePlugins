@@ -1,19 +1,18 @@
 package charlie.bot.server;
 
-import charlie.advisor.BasicStrategy;
 import charlie.card.Card;
 import charlie.card.Hand;
 import charlie.card.Hid;
 import charlie.dealer.Dealer;
 import charlie.dealer.Seat;
 import charlie.plugin.IBot;
-import charlie.util.Play;
 import java.util.List;
 import java.util.Random;
 
 /**
  *
- * @author Phil Picinic
+ * @author Phil Picinic, Gregory Cremins
+ * @version 3-26-2014
  */
 public class PerfectBot implements IBot{
 
@@ -22,12 +21,18 @@ public class PerfectBot implements IBot{
     private Hid hid;
     private Hand hand;
     private Card upCard;
-    private Random randomGen;
+    private final Random randomGen;
     
+    /**
+     * Constructor for perfect bot
+     */
     public PerfectBot(){
         randomGen = new Random();
     }
-    
+    /**
+     * Method to get the hand of the bot
+     * @return the bots current hand
+     */
     @Override
     public Hand getHand() {
         System.out.println("hand collected");
@@ -35,17 +40,27 @@ public class PerfectBot implements IBot{
         this.hand = new Hand(this.hid);
         return this.hand;
     }
-
+    /**
+     * Method to set the Bot's dealer
+     * @param dealer the bots dealer
+     */
     @Override
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
     }
-
+    /**
+     * Method to sit the bot down
+     * @param seat the seat the bot will take
+     */
     @Override
     public void sit(Seat seat) {
         this.seat = seat;
     }
-
+    /**
+     * Method to start the game
+     * @param hids the hands of the bot and the dealer
+     * @param shoeSize the shoe size
+     */
     @Override
     public void startGame(List<Hid> hids, int shoeSize) {
         
@@ -55,6 +70,13 @@ public class PerfectBot implements IBot{
     public void endGame(int shoeSize) {
         
     }
+    
+    /**
+     * Method to deal the card to the bot 
+     * @param hid the current hand ID of the bot
+     * @param card the card to deal to the bot
+     * @param values values of all cards
+     */
 
     @Override
     public void deal(Hid hid, Card card, int[] values) {
@@ -68,7 +90,9 @@ public class PerfectBot implements IBot{
             this.upCard = card;
         }
     }
-
+    /**
+     * Method to insure
+     */
     @Override
     public void insure() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -108,7 +132,10 @@ public class PerfectBot implements IBot{
     public void shuffling() {
         
     }
-
+    /**
+     * method to make a play
+     * @param hid the hand ID of the player
+     */
     @Override
     public void play(Hid hid) {
         if (this.hid.getSeat() == hid.getSeat()) {

@@ -175,7 +175,13 @@ public class StrategyCard {
             cardVal = 11;
         }
         ArrayList<Play> temp = card.get(hand);
-        return temp.get(cardVal);
+        
+        Play play = temp.get(cardVal);
+         if(play == Play.DOUBLE_DOWN && myHand.size() > 2)
+        {
+            play = Play.HIT;
+        }
+         return play;
     }
 
     /**
@@ -213,6 +219,10 @@ public class StrategyCard {
             }
             ArrayList<Play> temp = card.get(handString);
             play = temp.get(cardVal);
+        }
+        if(play == Play.DOUBLE_DOWN && myHand.size() > 2)
+        {
+            play = Play.HIT;
         }
 
         return play;
