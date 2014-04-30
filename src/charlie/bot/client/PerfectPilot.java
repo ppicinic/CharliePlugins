@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class PerfectPilot implements IGerty{
     
     private static final Logger log = LoggerFactory.getLogger("PerfectPilot");
-    private static final int minBetAmt = 5;
+    private static final int minBetAmt = 100;
     private Courier courier;
     private AMoneyManager moneyManager;
     //shoe size
@@ -51,12 +51,13 @@ public class PerfectPilot implements IGerty{
                     BasicStroke.CAP_BUTT,
                     BasicStroke.JOIN_MITER,
                     10.0f, dash1, 0.0f);  
-    
+    private PerfectStrategy strategy;
     
     public PerfectPilot(){
         gameCount = 0;
         count = 0;
         aceCount = 4;
+        strategy = new PerfectStrategy();
     }
 
     @Override
@@ -225,7 +226,7 @@ public class PerfectPilot implements IGerty{
     @Override
     public void play(Hid hid) {
        if(gameCount < 101 && hid.getSeat() == Seat.YOU){
-           PerfectPilotPlay p = new PerfectPilotPlay(this, courier, hid, hand, upCard);
+           PerfectPilotPlay p = new PerfectPilotPlay(this, courier, hid, hand, upCard, strategy, count);
            Thread t = new Thread(p);
            t.start();
        }
