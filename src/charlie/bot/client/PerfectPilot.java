@@ -39,8 +39,8 @@ public class PerfectPilot implements IGerty{
     public void go() {
         int amt = 0;
         moneyManager.clearBet();
-        if(count + aceCount > 0){
-            for(int i = 0; i < count + aceCount; i++){
+        if(count > 0){
+            for(int i = 0; i < count; i++){
                 moneyManager.upBet(minBetAmt);
                 amt += minBetAmt;
             }
