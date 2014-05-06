@@ -156,7 +156,9 @@ public class PerfectStrategy {
             }
             if (value < 10) {
                 System.out.println("softace");
-                return "A" + value;
+                if(value != 1){
+                    return "A" + value;
+                }
             }
         }
         int value = 0;

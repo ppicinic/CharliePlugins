@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class PerfectPilot implements IGerty{
     
     private static final Logger log = LoggerFactory.getLogger("PerfectPilot");
-    private static final int minBetAmt = 100;
+    private static final int minBetAmt = 5;
     private Courier courier;
     private AMoneyManager moneyManager;
     //shoe size
@@ -42,8 +42,9 @@ public class PerfectPilot implements IGerty{
     private int numWins;
     private int numBreaks;
     private int numLoses;
+    private int numPushes;
     DecimalFormat df = new DecimalFormat("#.##");
-    protected Font font = new Font("Arial", Font.BOLD, 15);
+    protected Font font = new Font("Arial", Font.BOLD, 12);
     protected Font font2 = new Font("Arial", Font.BOLD, 9);
     protected float dash1[] = {10.0f};
     protected BasicStroke dashed
@@ -52,9 +53,14 @@ public class PerfectPilot implements IGerty{
                     BasicStroke.JOIN_MITER,
                     10.0f, dash1, 0.0f);  
     private PerfectStrategy strategy;
+    private int trueCount;
+    private int maxBetAmt;
+    
     
     public PerfectPilot(){
         gameCount = 0;
+        shoeSize = 52;
+        maxBetAmt = 200;
         count = 0;
         aceCount = 4;
         strategy = new PerfectStrategy();
@@ -63,9 +69,10 @@ public class PerfectPilot implements IGerty{
     @Override
     public void go() {
         amt = 0;
+        trueCount = (int)((count) / (shoeSize / 52.0));
         moneyManager.clearBet();
-        if(count > 0){
-            for(int i = 0; i < count; i++){
+        if(trueCount > 0){
+            for(int i = 0; i < trueCount && amt < maxBetAmt; i++){
                 moneyManager.upBet(minBetAmt);
                 amt += minBetAmt;
             }
@@ -111,25 +118,28 @@ public class PerfectPilot implements IGerty{
         g.setColor(Color.orange);
         g.drawString("Shoe count : " + df.format(shoeSize), 5, 280);
         //Render the count
-        g.drawString("Count: " + count, 5, 300);
+        g.drawString("Count: " + count, 5, 295);
+        //g.drawString("Ace Side Count: " + aceCount, 5, 310);
+        g.drawString("True Count: "+ trueCount, 5,310);
         //Render the games played
-        g.drawString("Games Played : " + gameCount, 5, 320);
+        g.drawString("Games Played: " + gameCount, 5, 325);
         //Render the max bet
         g.drawString("Max bet: N/A", 5, 340);
         //Render the mean bet
         if(gameCount == 0)
         {
-            g.drawString("Mean Bet: 0", 5, 360);
+            g.drawString("Mean Bet: 0", 5, 355);
         }
         else
         {
-            g.drawString("Mean Bet: " + df.format(totalBet /(double) gameCount), 5, 360);
+            g.drawString("Mean Bet: " + df.format(totalBet /(double) gameCount), 5, 355);
         }
         //Render the counts
         g.setFont(font2);
-        g.drawString("BlackJacks|Charlies|Wins|Breaks|Loses", 5, 380);
+        g.drawString("BlackJacks|Charlies|Wins|Breaks|Loses", 5, 370);
+        g.drawString("|Pushes", 150, 380);
         g.setFont(font);
-        g.drawString(numBlackJacks + "|" + numCharlies + "|" + numWins + "|" + numBreaks + "|" + numLoses, 5, 395);
+        g.drawString(numBlackJacks + "|" + numCharlies + "|" + numWins + "|" + numBreaks + "|" + numLoses + "|" + numPushes, 5, 395);
         
     }
 
@@ -174,6 +184,8 @@ public class PerfectPilot implements IGerty{
         }
         log.info("count: " + count);
         log.info("acecount: " + aceCount);
+        shoeSize--;
+        trueCount = (int)((count) / (shoeSize / 52.0));
     }
 
     @Override
@@ -183,7 +195,7 @@ public class PerfectPilot implements IGerty{
 
     @Override
     public void bust(Hid hid) {
-        numLoses++;
+        numBreaks++;
     }
 
     @Override
@@ -212,7 +224,7 @@ public class PerfectPilot implements IGerty{
 
     @Override
     public void push(Hid hid) {
-        numBreaks++;
+        numPushes++;
         
     }
 
